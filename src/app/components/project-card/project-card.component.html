@@ -1,0 +1,18 @@
+<mat-card>
+    <mat-card-header>
+      <mat-card-title>{{ project.title }}</mat-card-title>
+    </mat-card-header>
+    <img *ngIf="project.image" mat-card-image [src]="project.image" alt="{{ project.title }}" />
+    <mat-card-content>
+      <p [innerHTML]="project.description"></p>
+      <p *ngIf="project.links && project.links.length">
+        <strong>Links:</strong>
+        <ul>
+          <li *ngFor="let link of project.links">
+            <a [href]="link.url" target="_blank" rel="noopener noreferrer">{{ link.text }}</a>
+          </li>
+        </ul>
+      </p>
+    </mat-card-content>
+  </mat-card>
+  
