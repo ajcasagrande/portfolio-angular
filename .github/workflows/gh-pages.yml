@@ -1,0 +1,35 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1) Check out the latest code
+      - name: Check out code
+        uses: actions/checkout@v4
+      
+      # 2) Use Node.js 16.x (or 18.x if you prefer)
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      
+      # 3) Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # 4) Build your Angular app (dist output => dist/my-portfolio/)
+      - name: Build Angular app
+        run: npm run build --prod
+      
+      # 5) Deploy the dist folder to gh-pages branch
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages        # Branch for GitHub Pages
+          folder: dist/my-portfolio  # Build output folder
